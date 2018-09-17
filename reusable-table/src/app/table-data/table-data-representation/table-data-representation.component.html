@@ -1,0 +1,40 @@
+
+<div *ngIf='search==true'>
+   <!-- <app-table-search [result]='value'></app-table-search>  -->
+   <label>
+    Type something :
+  </label>
+  
+   <input  type="text" 
+          placeholder="data"
+          (change)='searchedTextChanged($event,$event.target.value)'            
+   > 
+</div>
+
+<div> 
+  <table style="width:80%">
+    <thead>
+      <tr id="t_head">
+        <th *ngFor="let col of Columnsdata">              
+          {{col.value}}
+          <div *ngIf='sorting==true' >
+             <!-- <app-table-sort (click)='onclick($event,col.attribute)'></app-table-sort> -->
+              <button class='btn btn-primary'  (click)='sortingMethod(col.attribute)'>
+                <i><span class="glyphicon glyphicon-arrow-up"></span>sort</i>
+            </button> 
+          </div>
+          </th>
+      </tr>
+      
+    </thead>
+    <tbody>
+     
+      <tr *ngFor="let row of items">
+        <td *ngFor="let col of Columnsdata ">
+          {{row[col.attribute]}}
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
