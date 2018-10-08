@@ -1,0 +1,5 @@
+showHtml=(txt)=>{
+    return(
+        <span dangerouslySetInnerHTML={{_html:`<b>${txt}</b>`}}></span>
+    );
+}

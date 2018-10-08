@@ -1,4 +1,7 @@
+import { IUser } from './../userdata';
+import { DataService } from './../service/data.service';
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-data',
@@ -7,25 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataComponent implements OnInit {
 
-  constructor() { }
+   constructor(private dataservice: DataService) {}
+
+
   title = 'REPRESENTING ATM TELLER SQUAD';
-  data = [
-    { id: 1, name: 'Rahul', phoneno: 123  },
-    { id: 2, name: 'Prashant', phoneno: 123},
-    { id: 3, name: 'Stuti', phoneno: 123},
-    { id: 4, name: 'Harish', phoneno: 999},
-  ];
 
-  Columnsdata = [
-      { attribute: 'id', value: 'ID'},
-      { attribute: 'name', value: 'Name'},
-      { attribute: 'phoneno', value: 'PhoneNO'}
+  data: IUser;
+  Columnsdata: any[];
 
-  ];
   sorting: boolean;
   search: boolean;
 
+   getColdata(): void {
+     this.Columnsdata = this.dataservice.getColdata();
+   }
+   getUserdata() {
+    this.dataservice.getUserdata()
+       .subscribe((response: IUser) => {
+         this.data = response;
+   });
+  }
+
   ngOnInit() {
+     this.getColdata();
+     this.getUserdata();
   }
 
 }
