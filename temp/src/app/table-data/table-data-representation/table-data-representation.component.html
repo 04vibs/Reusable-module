@@ -1,0 +1,51 @@
+
+
+<div *ngIf='search==true'>
+   <!-- <app-table-search [result]='value'></app-table-search>  -->
+   <label>
+    Type something :
+  </label>
+
+  <input [(ngModel)]="searchText" placeholder="search text goes here" >
+   <!-- (change)='searchedTextChanged($event,$event.target.value)' -->
+
+</div>
+
+<div  class ="container">
+<div class="table-responsive" >
+  <table style="width:100%">
+    <thead>
+      <tr id="t_head">
+        <th *ngFor="let col of Columnsdata">
+          {{col.value}}
+          <div *ngIf='sorting==true' >
+              <a><mat-icon (click)='sortingMethod(col.attribute)'>arrow_drop_up</mat-icon></a>
+
+
+             <!-- <app-table-sort (click)='onclick($event,col.attribute)'></app-table-sort> -->
+              <!-- <button class='btn btn-primary'  (click)='sortingMethod(col.attribute)'> -->
+                <!-- <i><span class="glyphicon glyphicon-arrow-up"></span>sort</i> -->
+                <!-- <div *ngIf='ascending == 1; then uporder else downorder '  ></div> -->
+                   <!-- <ng-template #uporder>
+                   </ng-template>
+                   <ng-template #downorder>
+                    <mat-icon>arrow_drop_down</mat-icon>
+                   </ng-template>                                                         -->
+            <!-- </button>  -->
+          </div>
+          </th>
+      </tr>
+
+    </thead>
+    <tbody >
+      <tr  *ngFor="let row of data | searchPipe: searchText | highlightSearchedText: searchText :'highlight'">
+        <td *ngFor="let col of Columnsdata  ">
+          {{row[col.attribute]}}
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
